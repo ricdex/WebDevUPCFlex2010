@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			import com.webdev.controller.events.GetAllUserEvent;
+			import com.webdev.controller.events.LoginEvent;
+			import com.webdev.model.UserModel;
+			
+			import mx.containers.ViewStack;
+			import mx.controls.Alert;
+			
+			[Bindabel]
+			public var model:UserModel = new UserModel();
+			private function sendLogout():void
+			{
+				var e:LoginEvent = new LoginEvent();
+				e.mainMxml = this.parent.parent.parent.parent as ViewStack;
+				e.state = false;
+				CairngormEventDispatcher.getInstance().dispatchEvent( e );
+			}
+			
+			public function llamarListaUsuarios():void
+			{
+				
+				var evt:GetAllUserEvent = new GetAllUserEvent();
+				evt.userModel = model;
+				CairngormEventDispatcher.getInstance().dispatchEvent( evt );
+				
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button x="165" y="251" label="logout" click="sendLogout()"/>
+	
+	<mx:DataGrid x="31" y="67" id="dg" dataProvider="{model.usuarios}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Nombre" dataField="nombre"/>
+			<mx:DataGridColumn headerText="Apellido" dataField="apellido"/>
+			<mx:DataGridColumn headerText="Email" dataField="email"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

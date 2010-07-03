@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"  
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="594" height="438">
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" gap="20" paddingTop="100" paddingLeft="200"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.mate.events.GetAllUserEvent;
+			
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			public var usuarios:ArrayCollection;
+			
+			private function getUsuarios():void
+			{
+				dispatchEvent( new GetAllUserEvent (GetAllUserEvent.GET_ALL_USER_EVENT));
+			}
+		]]>
+	</fx:Script>
+	<s:Label text="MATE FRAMEWORK&#xd;WEBDEV @UPC" verticalAlign="middle" fontSize="34" width="384" textAlign="center"/>
+	
+	
+	<mx:DataGrid x="137" y="140" id="dg" dataProvider="{usuarios}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Nombre" dataField="nombre"/>
+			<mx:DataGridColumn headerText="Apellido" dataField="apellido"/>
+			<mx:DataGridColumn headerText="Email" dataField="email"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<s:Button label="Obtener Usuarios" click="getUsuarios()"/>
+</s:Group>

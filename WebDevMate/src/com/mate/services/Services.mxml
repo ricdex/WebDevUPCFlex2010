@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Object xmlns="*" xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:mate="http://mate.asfusion.com/">
+
+	<mx:WebService id="usuarios" wsdl="http://localhost:8080/CXFSpring/cxf/HelloWorld?wsdl" />
+
+</Object>

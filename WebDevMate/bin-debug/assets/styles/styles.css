@@ -1,0 +1,47 @@
+@font-face
+{
+    src: url("assets/fonts/MyriadWebPro.ttf");
+    font-family: main;
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face
+{
+    src: url("assets/fonts/MyriadWebPro-Bold.ttf");
+    font-family: main;
+    font-style: normal;
+    font-weight: bold;
+}
+
+Application {
+	font-family: main;
+	color: #333333;
+	font-size: 12;
+	theme-color: #006699;
+	background-image: Embed("assets/images/app_skin.png",
+			scaleGridLeft="5",
+			scaleGridRight="10",
+			scaleGridTop="60",
+			scaleGridBottom="64");
+			
+	paddingTop: 0; 
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingBottom: 0; 
+}
+
+Button {
+	corner-radius: 2;
+}
+
+.pictureFrame {
+	drop-shadow-enabled: false;
+	header-height: 0;
+	border-color: #919191;
+	border-alpha: 0.7;
+	border-thickness-left: 1;
+	border-thickness-right: 1;
+	border-thickness-bottom: 0;
+	corner-radius: 0;
+}

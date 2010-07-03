@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns="http://mate.asfusion.com/" 
+	xmlns:services="com.mate.services.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.asfusion.mate.events.UnhandledFaultEvent;
+			import com.mate.events.GetAllUserEvent;
+			import com.mate.managers.UserManager;
+			import com.mate.ui.views.MainView;
+		]]>
+	</mx:Script>
+	
+	<!-- Services ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<services:Services id="services" />
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<!-- Event Handlers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	
+	<!-- GetAllUserEvent.GET_ALL_USER_EVENT  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<EventHandlers type="{ GetAllUserEvent.GET_ALL_USER_EVENT }" debug="true">
+		<WebServiceInvoker instance="{ services.usuarios }"  
+			method="getUsuarios" >
+			
+			<resultHandlers>
+				<MethodInvoker generator="{ UserManager }" 
+					method="guardarUsuarios" 
+					arguments="{ resultObject }"/>
+			</resultHandlers>
+			
+		</WebServiceInvoker>	
+	</EventHandlers>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<!-- Injectors  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+	<Injectors target="{ MainView }">
+		<PropertyInjector targetKey="usuarios" 
+			source="{ UserManager }" 
+			sourceKey="usuarios"/>
+	</Injectors>
+	
+	
+</EventMap>
